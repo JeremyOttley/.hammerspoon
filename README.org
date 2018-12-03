@@ -1,4 +1,6 @@
 * Hammerspoon Configuration
 -Workstation:
+
   -Release version 0.9.46
+  
   -https://github.com/Hammerspoon/hammerspoon/releases/tag/0.9.46
