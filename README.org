@@ -4,3 +4,24 @@
   -Release version 0.9.46
   
   -https://github.com/Hammerspoon/hammerspoon/releases/tag/0.9.46
+
+| CommandName   | (Chord) Activator |
+|-------+-------|
+| center     | (⌥ ⌘) C          |
+| fullScreen | (⌥ ⌘) F          |
+| leftHalf   | (⌥ ⌘) ←          |
+| rightHalf  | (⌥ ⌘) →          |
+| topHalf    | (⌥ ⌘) ↑          |
+| bottomHalf | (⌥ ⌘) ↓          |
+| topLeft    | (⌃ ⌘) ←          |
+| bottomLeft | (⌃ ⌘ ⇧) ←       |
+| topRight   | (⌃ ⌘) →          |
+| bottomRight| (⌃ ⌘ ⇧) →       |
+| nextDisplay| (⌃ ⌥ ⌘) →       |
+| prevDisplay| (⌃ ⌥ ⌘) ←       |
+| nextThird  | (⌃ ⌥ ⌘) →       |
+| prevThird  | (⌃ ⌥ ⌘) ←       |
+| enlarge    | (⌃ ⌥ ⇧) →       |
+| shrink     | (⌃ ⌥ ⇧) ←       |
+| undo       | (⌥ ⌘) Z          |
+| redo       | (⌥ ⌘ ⇧) Z       |
