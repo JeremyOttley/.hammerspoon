@@ -1,0 +1,16 @@
+* write shortcut to raise jpg in this folder
+
+image_file = Command-Control-Option.jpg
+
+* kinda like hyper
+
+chord1 = {command + alt}
+
+** real chords
+
+hyper = {"cmd","alt","ctrl"}
+shift_hyper = {"cmd","alt","ctrl","shift"}
+
+* image reference
+
+mac_keys = hs.image.imageFromPath(hs.configdir .. "Command-Control-Option.jpg")
