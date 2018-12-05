@@ -2,6 +2,9 @@
 --local alert_sound = hs.sound.getByFile("alert.wav")
 --alert_sound:play() 
 
+-- pomodoro
+pomo = require('utils/pomo')
+
 -- App vars
 --local browser   = hs.appfinder.appFromName("Google Chrome")
 --local term      = hs.appfinder.appFromName("xterm-256color")
