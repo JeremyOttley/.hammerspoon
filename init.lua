@@ -1,7 +1,6 @@
 -- Welcome Message
-local alert_sound = hs.sound.getByFile("alert.wav")
---local tink_sound  = hs.sound.getByName("Tink") -- Not actually used, just as a nice example.
-                                               -- More sounds in /System/Library/Sounds
+--local alert_sound = hs.sound.getByFile("alert.wav")
+--alert_sound:play() 
 
 -- App vars
 --local browser   = hs.appfinder.appFromName("Google Chrome")
@@ -10,9 +9,6 @@ local alert_sound = hs.sound.getByFile("alert.wav")
 --local outlook   = hs.appfinder.appFromName("Outlook")
 --local finder    = hs.appfinder.appFromName("Finder")
 --local slack     = hs.appfinder.appFromName("Slack")
-
-alert_sound:play()
-hs.alert.show("Hammerspoon, at your service.", 3)
 
 -- Set window animation off. It's much smoother.
 hs.window.animationDuration = 0
@@ -27,8 +23,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
 end)
 
 -- Reload on config change
--- consider switching to spoon later
-
 function reloadConfig(files)
     doReload = false
     for _,file in pairs(files) do
@@ -42,7 +36,8 @@ function reloadConfig(files)
 end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 --do I need this alert?
---hs.alert.show("Config loaded")
+hs.alert.show("Hammerspoon ready!", 3)
+--hs.sound.getByFile("alert.wav"):play()
 
 -- itunes
 --hs.itunes.pause()
