@@ -112,3 +112,10 @@ end
 
 --- quick open folders
 directoryLaunchKeyRemap({"ctrl"}, "D", "~/Documents") 
+
+-- quick open new finder window
+hs.hotkey.bind({"alt"}, 'F', function()
+      finder = hs.appfinder.appFromName("Finder")
+      finder:selectMenuItem({"File","New Finder Window"})
+      finder:activate()
+      end)
