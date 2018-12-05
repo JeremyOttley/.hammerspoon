@@ -83,19 +83,6 @@ hs.hotkey.bind(modkey, "Right", function()
   win:setFrame(f)
 end)
 
--- open key folders with ctrl + 1,2,3,
---function directoryLaunchKeyRemap(mods, key, dir)
---    local mods = mods or {}
---    hs.hotkey.bind(mods, key, function()
---        local shell_command = "open " .. dir
---        hs.execute(shell_command)
---    end)
---end
-
---directoryLaunchKeyRemap({"ctrl"}, "1", "/Applications") 
-
---[[ UTILS ]]--
-
 -- open
 function open(name)
     return function()
@@ -107,14 +94,23 @@ function open(name)
   end
   
   --- quick open applications
-  hs.hotkey.bind({"alt"}, "E", open("Finder"))
-  --hs.hotkey.bind({"alt"}, "W", open("WeChat"))
-  --hs.hotkey.bind({"alt"}, "C", open("Google Chrome"))
-  hs.hotkey.bind({"alt"}, "T", open("xterm-256color"))
-  --hs.hotkey.bind({"alt"}, "X", open("Xcode"))
-  --hs.hotkey.bind({"alt"}, "S", open("Sublime Text"))
-  --hs.hotkey.bind({"alt"}, "V", open("Visual Studio Code"))
-  hs.hotkey.bind({"alt"}, "I", open("BBEdit"))
-  hs.hotkey.bind({"alt"}, "N", open("iTunes"))
-  hs.hotkey.bind({"alt"}, "M", open("Outlook"))
-  hs.hotkey.bind({"alt"}, "H", open("Things3"))
+  hs.hotkey.bind({"alt"}, "pad1", open("Finder"))
+  hs.hotkey.bind({"alt"}, "pad2", open("xterm-256color"))
+  hs.hotkey.bind({"alt"}, "pad3", open("BBEdit"))
+  hs.hotkey.bind({"alt"}, "pad4", open("iTunes"))
+  hs.hotkey.bind({"alt"}, "o", open("/Applications/Outlook"))
+
+-- Determine all essential folders
+-- Map them to letters instead of numbers for now
+
+-- open key folders with ctrl + 1,2,3,
+function directoryLaunchKeyRemap(mods, key, dir)
+    local mods = mods or {}
+    hs.hotkey.bind(mods, key, function()
+        local shell_command = "open " .. dir
+        hs.execute(shell_command)
+    end)
+end
+
+--- quick open folders
+directoryLaunchKeyRemap({"ctrl"}, "D", "~/Documents") 
