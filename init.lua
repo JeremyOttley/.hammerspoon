@@ -3,7 +3,7 @@
 --alert_sound:play() 
 
 -- pomodoro
-pomo = require('utils/pomo')
+pomo = require('utils/cherry')
 
 -- App vars
 --local browser   = hs.appfinder.appFromName("Google Chrome")
