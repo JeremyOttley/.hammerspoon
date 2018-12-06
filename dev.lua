@@ -142,3 +142,6 @@ hs.hotkey.bind({"alt", "shift"}, 'P', function()
 --hs.application.launchOrFocus("Microsoft Excel")
 --hs.application.launchOrFocus("Adobe Acrobat Pro")
 --hs.application.launchOrFocus("Microsoft Outlook")
+
+-- does this work?
+--tabs.enableForApp("Adobe Acrobat Pro")
