@@ -1,8 +1,3 @@
--- Welcome Message
-hs.alert.show("Hammerspoon ready!", 3)
---local alert_sound = hs.sound.getByFile("alert.wav")
---alert_sound:play() 
-
 -- Reload on config change
 function reloadConfig(files)
     doReload = false
@@ -16,14 +11,16 @@ function reloadConfig(files)
     end
 end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+hs.alert.show("Hammerspoon ready!", 3)
 
+-- modkeys/chords
+modkey = {"cmd","alt"}
 
+-- {'⌘', '⌥', 'ctrl'}
+local hyper = {'ctrl', 'alt', 'cmd'}
 
--- Hyper key 
-hyper = {'⌘', '⌥', 'ctrl'}
-
--- Shift Hyper
-shift_hyper = {'⌘', '⌥', '⇧', 'ctrl'}
+--{'⌘', '⌥', '⇧', 'ctrl'}
+local hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
 
 -- Modules
 local fnutils = hs.fnutils
@@ -51,20 +48,38 @@ local grid = hs.grid
 -- Other local variables
 local shift = 0.075
 
--- App vars
---local browser   = hs.appfinder.appFromName("Google Chrome")
---local term      = hs.appfinder.appFromName("xterm-256color")
---local bbedit    = hs.appfinder.appFromName("BBEdit")
---local outlook   = hs.appfinder.appFromName("Outlook")
---local finder    = hs.appfinder.appFromName("Finder")
---local slack     = hs.appfinder.appFromName("Slack")
+--
+-- [[ Functions ]] --
+--
 
--- [[ Window Movement ]] --
+-- open
+function open(name)
+    return function()
+        hs.application.launchOrFocus(name)
+        if name == 'Finder' then
+            hs.appfinder.appFromName(name):activate()
+        end
+    end
+end
 
--- modkeys/chords
-modkey = {"cmd","alt"}
-local hyper = {'ctrl', 'alt', 'cmd'}
-local hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
+-- open key folders with ctrl + key
+function directoryLaunchKeyRemap(mods, key, dir)
+    local mods = mods or {}
+    hs.hotkey.bind(mods, key, function()
+        local shell_command = "open " .. dir
+        hs.execute(shell_command)
+    end)
+end
+
+--
+-- [[ Windows ]] --
+--
+
+-- Set window animation off. It's much smoother.
+hs.window.animationDuration = 0
+
+-- Remove window shadows
+hs.window.setShadows(true)
 
 -- tile left
 hs.hotkey.bind(modkey, "Left", function()
@@ -94,30 +109,24 @@ hs.hotkey.bind(modkey, "Right", function()
   win:setFrame(f)
 end)
 
--- open
-function open(name)
-    return function()
-        hs.application.launchOrFocus(name)
-        if name == 'Finder' then
-            hs.appfinder.appFromName(name):activate()
-        end
-    end
-  end
+--[[ Window Filter ]]--
+-- set up your windowfilter
+-- switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
+-- switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
+-- switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome'} -- specialized switcher for your dozens of browser windows :)
 
--- Set window animation off. It's much smoother.
-hs.window.animationDuration = 0
+-- bind to hotkeys; WARNING: at least one modifier key is required!
+-- hs.hotkey.bind('alt','tab','Next window',function()switcher:next()end)
+-- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher:previous()end)
 
--- Remove window shadows
-hs.window.setShadows(true)
+-- alternatively, call .nextWindow() or .previousWindow() directly (same as hs.window.switcher.new():next())
+-- hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
+-- you can also bind to `repeatFn` for faster traversing
+-- hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
 
--- open key folders with ctrl + 1,2,3,
-function directoryLaunchKeyRemap(mods, key, dir)
-    local mods = mods or {}
-    hs.hotkey.bind(mods, key, function()
-        local shell_command = "open " .. dir
-        hs.execute(shell_command)
-    end)
-end
+--
+-- [[ Commands ]] --
+--
 
 --- quick open folders
 directoryLaunchKeyRemap({"ctrl"}, "D", "~/Documents") 
@@ -156,6 +165,5 @@ hs.hotkey.bind({"alt", "shift"}, 'O', function()
 --  hs.application.launchOrFocus("Adobe Acrobat Pro")
 --      end)
 
-
--- does this work?
---tabs.enableForApp("Adobe Acrobat Pro")
+-- raise console
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "Y", hs.toggleConsole)
