@@ -1,17 +1,17 @@
-* Hammerspoon Configuration
+# Hammerspoon Configuration
 -Workstation:
 
   -Release version 0.9.46
   
   -https://github.com/Hammerspoon/hammerspoon/releases/tag/0.9.46
 
-** Usage
+## Usage
 
 You should definitely check out `init.lua` for the full "how to use" experience. That's where
 all of the usage is defined, after all. For a brief breakdown though, here's what does what:
 
-*** "hyper" refers to pressing <kbd>⌘ + ⌥ + ⌃ </kbd> at once.
-*** "hyperShift" refers to pressing <kbd>⌘ + ⌥ + ⇧ </kbd> at once.
+### "hyper" refers to pressing <kbd>⌘ + ⌥ + ⌃ </kbd> at once.
+### "hyperShift" refers to pressing <kbd>⌘ + ⌥ + ⇧ </kbd> at once.
 
 | Key Combination  | Description |
 |-------+-------|
