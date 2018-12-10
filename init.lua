@@ -124,6 +124,49 @@ end)
 -- you can also bind to `repeatFn` for faster traversing
 -- hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
 
+--[[GRID]]--
+
+-- Set grid size.
+hs.grid.GRIDWIDTH  = 12
+hs.grid.GRIDHEIGHT = 12
+hs.grid.MARGINX    = 0
+hs.grid.MARGINY    = 0
+-- Set window animation off. It's much smoother.
+hs.window.animationDuration = 0
+-- Set volume increments
+local volumeIncrement = 5
+
+hs.hotkey.bind(hyper, ';', function() hs.grid.snap(hs.window.focusedWindow()) end)
+hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
+
+hs.hotkey.bind(hyper,      '=', function() hs.grid.adjustWidth(1)   end)
+hs.hotkey.bind(hyper,      '-', function() hs.grid.adjustWidth(-1)  end)
+hs.hotkey.bind(hyperShift, '=', function() hs.grid.adjustHeight(1)  end)
+hs.hotkey.bind(hyperShift, '-', function() hs.grid.adjustHeight(-1) end)
+
+hs.hotkey.bind(hyperShift, 'left',  function() hs.window.focusedWindow():focusWindowWest()  end)
+hs.hotkey.bind(hyperShift, 'right', function() hs.window.focusedWindow():focusWindowEast()  end)
+hs.hotkey.bind(hyperShift, 'up',    function() hs.window.focusedWindow():focusWindowNorth() end)
+hs.hotkey.bind(hyperShift, 'down',  function() hs.window.focusedWindow():focusWindowSouth() end)
+
+hs.hotkey.bind(hyper, 'M', hs.grid.maximizeWindow)
+
+hs.hotkey.bind(hyper, 'F', function() hs.window.focusedWindow():toggleFullScreen() end)
+
+hs.hotkey.bind(hyper, 'N', hs.grid.pushWindowNextScreen)
+hs.hotkey.bind(hyper, 'P', hs.grid.pushWindowPrevScreen)
+
+hs.hotkey.bind(hyper, 'J', hs.grid.pushWindowDown)
+hs.hotkey.bind(hyper, 'K', hs.grid.pushWindowUp)
+hs.hotkey.bind(hyper, 'H', hs.grid.pushWindowLeft)
+hs.hotkey.bind(hyper, 'L', hs.grid.pushWindowRight)
+
+hs.hotkey.bind(hyper, 'U', hs.grid.resizeWindowTaller)
+hs.hotkey.bind(hyper, 'O', hs.grid.resizeWindowWider)
+hs.hotkey.bind(hyper, 'I', hs.grid.resizeWindowThinner)
+hs.hotkey.bind(hyper, 'Y', hs.grid.resizeWindowShorter)
+
+
 --
 -- [[ Commands ]] --
 --
