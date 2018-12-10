@@ -14,7 +14,7 @@ all of the usage is defined, after all. For a brief breakdown though, here's wha
 *** "hyperShift" refers to pressing <kbd>⌘ + ⌥ + ⇧ </kbd> at once.
 
 | Key Combination                 | Description                                                                                            |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
++ ------------------------------- + ----------------------------------------------------------------------------------------------------
 | hyper + <kbd>;</kbd>             | Snaps the focused window to the grid.                                                                  |
 | hyper + <kbd>'</kbd>             | Snaps *all* visible windows to the grid.                                                               |
 | hyper + <kbd>=</kbd>             | Adds a column to the width of the grid.                                                                |
