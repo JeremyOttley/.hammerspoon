@@ -136,8 +136,8 @@ hs.window.animationDuration = 0
 -- Set volume increments
 local volumeIncrement = 5
 
-hs.hotkey.bind(hyper, ';', function() hs.grid.snap(hs.window.focusedWindow()) end)
-hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
+--hs.hotkey.bind(hyper, ';', function() hs.grid.snap(hs.window.focusedWindow()) end)
+--hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
 
 hs.hotkey.bind(hyper,      '=', function() hs.grid.adjustWidth(1)   end)
 hs.hotkey.bind(hyper,      '-', function() hs.grid.adjustWidth(-1)  end)
