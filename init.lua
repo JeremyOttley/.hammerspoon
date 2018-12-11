@@ -211,3 +211,11 @@ hs.hotkey.bind({"alt", "shift"}, 'O', function()
 -- raise console
 hs.hotkey.bind({"ctrl", "cmd", "alt"}, "Y", hs.toggleConsole)
 
+--- key macros
+  -- function keyStrokes(str)
+    -- return function()
+        -- hs.eventtap.keyStrokes(str)
+    -- end
+  -- end
+  -- hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
+
