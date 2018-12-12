@@ -10,7 +10,7 @@
 
 --[[ configuration parameters ]]
 local showHintMod = {'cmd', 'alt'}
-local showHintKey = 'E'
+local showHintKey = 'H'
 local hintKeys = {"A", "S", "D", "F", "J", "K", "L", ";", "G", "H", "Q", 
     "W", "E", "R", "U", "I", "O", "P", "T", "Y", "Z", "X", "C", "V", 
     "N", "M", ",", ".", "B"}
