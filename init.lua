@@ -1,3 +1,5 @@
+require("extras/cheaphints")
+
 -- Reload on config change
 function reloadConfig(files)
     doReload = false
