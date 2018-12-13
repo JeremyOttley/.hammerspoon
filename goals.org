@@ -6,3 +6,28 @@
 -tab adobe acrobat windows (possible?)
 
 -acrobat on right, chrome on left with layout
+
+#+begin_src lua
+-- whenever an acrobat window is opened it should take up the right 50% of the screen
+
+local windowLayout = {
+  {"Adobe Acrobat", nil, nil, hs.layoutright50, nil nil},
+}
+hs.layout.apply(windowLayout)
+
+-- File, View(drop down), select  Zoom, select option "Zoom To Page Level"
+-- do I need a watcher for this?
+-- eventtap to recognize that a new acrobat window has opened
+aacro = hs.appfinder.appFromName("Adobe Acrobat Pro")
+aacro:selectMenuitem({"File", "View", "Zoom", "Zoom To Page Level"})
+aacro:activate()
+
+---
+
+hs.hotkey.bind(hyper,"q",function()
+	ffox = hs.appfinder.appFromName("Firefox")
+	ffox:selectMenuItem({"File","New Window"})
+	ffox:activate()
+end)
+
+#+end_src
