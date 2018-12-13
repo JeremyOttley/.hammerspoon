@@ -1,28 +1,6 @@
--- Reload on config change
-function reloadConfig(files)
-    doReload = false
-    for _,file in pairs(files) do
-        if file:sub(-4) == ".lua" then
-            doReload = true
-        end
-    end
-    if doReload then
-        hs.reload()
-    end
-end
-myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
-hs.alert.show("Hammerspoon ready!", 3)
-
--- modkeys/chords
-modkey = {"cmd","alt"}
-
--- {'⌘', '⌥', 'ctrl'}
-local hyper = {'ctrl', 'alt', 'cmd'}
-
---{'⌘', '⌥', '⇧', 'ctrl'}
-local hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
-
--- Modules
+--
+-- [[ Modules ]] --
+--
 local fnutils = hs.fnutils
 local each = fnutils.each
 local partial = fnutils.partial
@@ -45,12 +23,47 @@ local setPrimary = screen.setPrimary
 
 local grid = hs.grid
 
+-- Set window animation off. It's much smoother.
+hs.window.animationDuration = 0
+
+-- Remove window shadows
+hs.window.setShadows(true)
+
 -- Other local variables
 local shift = 0.075
+
+-- modkeys/chords
+modkey = {"cmd","alt"}
+
+-- {'⌘', '⌥', 'ctrl'}
+local hyper = {'ctrl', 'alt', 'cmd'}
+
+--{'⌘', '⌥', '⇧', 'ctrl'}
+local hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
+
+-- init grid --
+hs.grid.MARGINX = 0
+hs.grid.MARGINY = 0
+hs.grid.setGrid('2x2')
 
 --
 -- [[ Functions ]] --
 --
+
+-- Reload on config change
+function reloadConfig(files)
+    doReload = false
+    for _,file in pairs(files) do
+        if file:sub(-4) == ".lua" then
+            doReload = true
+        end
+    end
+    if doReload then
+        hs.reload()
+    end
+end
+myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+hs.alert.show("Hammerspoon ready!", 3)
 
 -- open
 function open(name)
@@ -71,43 +84,14 @@ function directoryLaunchKeyRemap(mods, key, dir)
     end)
 end
 
---
--- [[ Windows ]] --
---
+-- Launch Applications --
+hs.hotkey.bind(hyper, 'T', "Terminal", function () hs.application.launchOrFocus("Terminal") end)
+hs.hotkey.bind(hyper, 'R', "Sublime Text", function () hs.application.launchOrFocus("Sublime Text") end)
+hs.hotkey.bind(hyper, 'S', "Safari", function () hs.application.launchOrFocus("Safari") end)
+hs.hotkey.bind(hyper, 'F', "Finder", function () hs.application.launchOrFocus("Finder") end)
 
--- Set window animation off. It's much smoother.
-hs.window.animationDuration = 0
 
--- Remove window shadows
-hs.window.setShadows(true)
-
--- tile left
-hs.hotkey.bind(modkey, "Left", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
-end)
-
--- tile right
-hs.hotkey.bind(modkey, "Right", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x + (max.w / 2)
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
-end)
+-- Organize Windows --
 
 --[[ Window Filter ]]--
 -- set up your windowfilter
@@ -123,6 +107,82 @@ end)
 -- hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
 -- you can also bind to `repeatFn` for faster traversing
 -- hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
+
+hs.hotkey.bind(hyper, 'W', hs.grid.maximizeWindow)
+
+--hs.hotkey.bind(hyper_cmd, 'D', hs.grid.pushWindowRight)
+--hs.hotkey.bind(hyper_cmd, 'A', hs.grid.pushWindowLeft)
+
+function toUpper ()
+	function fn (cell)
+		cell.y = 0
+		cell.x = 0
+		cell.w = 2
+		cell.h = 1
+		return hs.grid
+	end
+	hs.grid.adjustWindow(fn)
+end
+hs.hotkey.bind(hyper_cmd, 'W', toUpper)
+
+function toLower ()
+	function fn (cell)
+		cell.y = 1
+		cell.x = 0
+		cell.w = 2
+		cell.h = 1
+		return hs.grid
+	end
+	hs.grid.adjustWindow(fn)
+end
+hs.hotkey.bind(hyper_cmd, 'S', toLower)
+
+function toUpperLeft ()
+	function fn (cell)
+		cell.y = 0
+		cell.x = 0
+		cell.w = 1
+		return hs.grid
+	end
+	hs.grid.adjustWindow(fn)
+end
+hs.hotkey.bind(hyper, 'Q', toUpperLeft)
+
+function toUpperRight ()
+	function fn (cell)
+		cell.y = 0
+		cell.x = 1
+		cell.w = 1
+		return hs.grid
+	end
+	hs.grid.adjustWindow(fn)
+end
+hs.hotkey.bind(hyper, 'E', toUpperRight)
+
+function toLowerRight ()
+	function fn (cell)
+		cell.h = 1
+		cell.w = 1
+		cell.y = 1
+		cell.x = 1
+	end
+	hs.grid.adjustWindow(fn, window)
+end
+hs.hotkey.bind(hyper, 'D', toLowerRight)
+
+function toLowerLeft ()
+	function fn (cell)
+		cell.h = 1
+		cell.w = 1
+		cell.y = 1
+		cell.x = 0
+	end
+	hs.grid.adjustWindow(fn, window)
+end
+hs.hotkey.bind(hyper, 'A', toLowerLeft)
+
+-- Window Hints
+hs.hotkey.bind(hyper, '.', hs.hints.windowHints)
 
 --
 -- [[ Commands ]] --
