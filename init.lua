@@ -19,10 +19,10 @@ hs.alert.show("Hammerspoon ready!", 3)
 modkey = {"cmd","alt"}
 
 -- {'⌘', '⌥', 'ctrl'}
-local hyper = {'ctrl', 'alt', 'cmd'}
+hyper = {'ctrl', 'alt', 'cmd'}
 
 --{'⌘', '⌥', '⇧', 'ctrl'}
-local hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
+hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
 
 -- Modules
 local fnutils = hs.fnutils
@@ -196,6 +196,7 @@ hs.hotkey.bind({"alt", "shift"}, 'P', function()
 --hs.application.launchOrFocus("Microsoft Excel")
 --hs.application.launchOrFocus("Adobe Acrobat Pro")
 --hs.application.launchOrFocus("Microsoft Outlook")
+hs.hotkey.bind({"ctrl"}, 'R', "Sublime Text", function () hs.application.launchOrFocus("Sublime Text") end)
 
 hs.hotkey.bind({"alt", "shift"}, 'X', function()
   hs.application.launchOrFocus("Microsoft Excel")
@@ -214,10 +215,15 @@ hs.hotkey.bind({"alt", "shift"}, 'O', function()
 hs.hotkey.bind({"ctrl", "cmd", "alt"}, "Y", hs.toggleConsole)
 
 --- key macros
-  -- function keyStrokes(str)
-    -- return function()
-        -- hs.eventtap.keyStrokes(str)
-    -- end
-  -- end
-  -- hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
+   function keyStrokes(str)
+     return function()
+         hs.eventtap.keyStrokes(str)
+     end
+   end
+   hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
 
+
+--local windowLayout = {
+--  {"Adobe Acrobat Pro", nil, nil, hs.layoutright50, nil, nil},
+--}
+--  hs.layout.apply(windowLayout)
