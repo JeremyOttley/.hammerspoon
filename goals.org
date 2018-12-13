@@ -1,7 +1,4 @@
 * hold down control and select with mouse area
 ** print the selected area 
 
-* run or raise outlook
-* run or raise xcel
-
-* make hints better
+* work layout for acrobat
