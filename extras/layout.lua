@@ -66,6 +66,6 @@ end)
 bindKey('9', function()
   hs.layout.apply({
     {"Google Chrome", nil, screen, positions.left50,         nil, nil},
-    {"Slack",   nil, screen, positions.right50, nil, nil}
+    {"Acrobat",   nil, screen, positions.right50, nil, nil}
   })
 end)
