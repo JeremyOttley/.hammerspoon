@@ -212,7 +212,7 @@ hs.hotkey.bind({"alt", "shift"}, 'O', function()
 --      end)
 
 -- raise console
-hs.hotkey.bind({"ctrl", "cmd", "alt"}, "Y", hs.toggleConsole)
+hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
 
 --- key macros
    function keyStrokes(str)
@@ -220,10 +220,17 @@ hs.hotkey.bind({"ctrl", "cmd", "alt"}, "Y", hs.toggleConsole)
          hs.eventtap.keyStrokes(str)
      end
    end
-   hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
+   --hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
 
 
---local windowLayout = {
---  {"Adobe Acrobat Pro", nil, nil, hs.layoutright50, nil, nil},
---}
---  hs.layout.apply(windowLayout)
+hs.hotkey.bind({"alt", "cmd"},"L",function()
+  local windowLayout = {
+    {"Acrobat", nil, nil, hs.layout.right50, nil, nil},
+    {"Chrome", nil, nil, hs.layout.left50, nil, nil},
+   }
+    hs.layout.apply(windowLayout)
+
+  aacrobat = hs.appfinder.appFromName("Acrobat")
+  aacrobat:selectMenuItem({"View","Zoom", "Zoom to Page Level"})
+  aacrobat:activate()
+end)
