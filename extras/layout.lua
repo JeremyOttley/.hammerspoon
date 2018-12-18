@@ -68,4 +68,7 @@ bindKey('9', function()
     {"Google Chrome", nil, screen, positions.left50,         nil, nil},
     {"Acrobat",   nil, screen, positions.right50, nil, nil}
   })
+  aacrobat = hs.appfinder.appFromName("Acrobat")
+  aacrobat:selectMenuItem({"View","Zoom", "Zoom to Page Level"})
+  aacrobat:activate()
 end)
