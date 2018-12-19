@@ -1,0 +1,14 @@
+https://github.com/tstirrat/hammerspoon-config
+
+https://github.com/xsznix-dotfiles/.hammerspoon/blob/master/.hammerspoon/navigator.lua
+
+https://github.com/digitalbase/hammerspoon/blob/master/init.lua
+
+https://github.com/sduff/dotfiles/blob/master/.hammerspoon/init.lua
+
+
+http://larryhynes.net/2015/04/a-minor-update-to-my-hammerspoon-config.html
+
+https://github.com/Hammerspoon/hammerspoon/wiki/ztomer's-init.lua
+
+https://aaronlasseigne.com/2016/02/16/switching-from-slate-to-hammerspoon/
