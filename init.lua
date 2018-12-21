@@ -223,7 +223,7 @@ hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
    --hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
 
 
-hs.hotkey.bind({"alt", "cmd"},"L",function()
+hs.hotkey.bind({"cmd", "alt"},"L",function()
   local windowLayout = {
     {"Acrobat", nil, nil, hs.layout.right50, nil, nil},
     {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
