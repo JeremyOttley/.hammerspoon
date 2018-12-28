@@ -224,11 +224,11 @@ hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
 
 
 hs.hotkey.bind({"cmd", "alt"},"L",function()
-  local windowLayout = {
+  local proofingLayout = {
     {"Acrobat", nil, nil, hs.layout.right50, nil, nil},
     {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
    }
-    hs.layout.apply(windowLayout)
+    hs.layout.apply(proofingLayout)
 
   aacrobat = hs.appfinder.appFromName("Acrobat")
   aacrobat:selectMenuItem({"View","Zoom", "Zoom to Page Level"})
