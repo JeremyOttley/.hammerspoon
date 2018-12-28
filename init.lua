@@ -223,7 +223,7 @@ hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
    --hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
 
 
-hs.hotkey.bind({"cmd", "alt"},"L",function()
+hs.hotkey.bind({"cmd", "alt"},"0",function()
   local proofingLayout = {
     {"Acrobat", nil, nil, hs.layout.right50, nil, nil},
     {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
@@ -235,13 +235,13 @@ hs.hotkey.bind({"cmd", "alt"},"L",function()
   aacrobat:activate()
 end)
 
-hs.hotkey.bind(hyper, '0', function()
+hs.hotkey.bind({"cmd", "alt"}, '9', function()
   hs.application.launchOrFocus('Sublime Text')
   hs.application.launchOrFocus('Google Chrome')
-  local xmlLayout = {
+  local editorLayout = {
   {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
   {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
 }
-  hs.layout.apply(xmlLayout)
+  hs.layout.apply(editorLayout)
 end)
 
