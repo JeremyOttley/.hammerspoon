@@ -237,7 +237,7 @@ end)
 
 hs.hotkey.bind(hyper, '0', function()
   local xmlLayout = {
-  {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
+  {hs.application.launchOrFocus('Sublime Text'), nil, nil, hs.layout.right50, nil, nil},
   {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
 }
   hs.layout.apply(xmlLayout)
