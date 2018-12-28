@@ -245,7 +245,8 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   hs.layout.apply(editorLayout)
         
   subl = hs.appfinder.appFromName("Sublime Text")
-  subl:selectMenuItem({"Find","Replace"})
+  --subl:selectMenuItem({"Find","Replace"})
+    subl:selectMenuItem({"View","Layout", "Columns: 2"})
   subl:activate()
 end)
 
