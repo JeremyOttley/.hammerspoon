@@ -243,10 +243,9 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
 }
   hs.layout.apply(editorLayout)
-        
+  -- Doesn't work yet. Why?      
   subl = hs.appfinder.appFromName("Sublime Text")
-  --subl:selectMenuItem({"Find","Replace"})
-    subl:selectMenuItem({"View","Layout", "Columns: 2"})
+  subl:selectMenuItem({"Find","Replace"})
   subl:activate()
 end)
 
