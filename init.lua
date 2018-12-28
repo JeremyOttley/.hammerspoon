@@ -236,8 +236,12 @@ hs.hotkey.bind({"cmd", "alt"},"L",function()
 end)
 
 hs.hotkey.bind(hyper, '0', function()
-  local editLayout = {
+  hs.application.launchOrFocus('Sublime Text')
+  hs.application.launchOrFocus('Google Chrome')
+  local xmlLayout = {
   {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
+  {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
 }
-  hs.layout.apply(editLayout)
+  hs.layout.apply(xmlLayout)
 end)
+
