@@ -13,6 +13,10 @@ end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Hammerspoon ready!", 3)
 
+printers =  {
+  ['309917'] = 'HP LaserJet 600 M602',
+}
+
 -- modkeys/chords
 modkey = {"cmd","alt"}
 
