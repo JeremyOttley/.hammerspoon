@@ -57,7 +57,7 @@ local shift = 0.075
 -- open
 function open(name)
     return function()
-        hs.application.launchOrFocus(name)
+        app.launchOrFocus(name)
         if name == 'Finder' then
             hs.appfinder.appFromName(name):activate()
         end
@@ -129,44 +129,44 @@ end)
 --[[GRID]]--
 
 -- Set grid size.
-hs.grid.GRIDWIDTH  = 12
-hs.grid.GRIDHEIGHT = 12
-hs.grid.MARGINX    = 0
-hs.grid.MARGINY    = 0
+grid.GRIDWIDTH  = 12
+grid.GRIDHEIGHT = 12
+grid.MARGINX    = 0
+grid.MARGINY    = 0
 -- Set window animation off. It's much smoother.
 hs.window.animationDuration = 0
 -- Set volume increments
 local volumeIncrement = 5
 
---hs.hotkey.bind(hyper, ';', function() hs.grid.snap(hs.window.focusedWindow()) end)
---hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
+--hs.hotkey.bind(hyper, ';', function() grid.snap(hs.window.focusedWindow()) end)
+--hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), grid.snap) end)
 
-hs.hotkey.bind(hyper,      '=', function() hs.grid.adjustWidth(1)   end)
-hs.hotkey.bind(hyper,      '-', function() hs.grid.adjustWidth(-1)  end)
-hs.hotkey.bind(hyperShift, '=', function() hs.grid.adjustHeight(1)  end)
-hs.hotkey.bind(hyperShift, '-', function() hs.grid.adjustHeight(-1) end)
+hs.hotkey.bind(hyper,      '=', function() grid.adjustWidth(1)   end)
+hs.hotkey.bind(hyper,      '-', function() grid.adjustWidth(-1)  end)
+hs.hotkey.bind(hyperShift, '=', function() grid.adjustHeight(1)  end)
+hs.hotkey.bind(hyperShift, '-', function() grid.adjustHeight(-1) end)
 
 hs.hotkey.bind(hyperShift, 'left',  function() hs.window.focusedWindow():focusWindowWest()  end)
 hs.hotkey.bind(hyperShift, 'right', function() hs.window.focusedWindow():focusWindowEast()  end)
 hs.hotkey.bind(hyperShift, 'up',    function() hs.window.focusedWindow():focusWindowNorth() end)
 hs.hotkey.bind(hyperShift, 'down',  function() hs.window.focusedWindow():focusWindowSouth() end)
 
-hs.hotkey.bind(hyper, 'M', hs.grid.maximizeWindow)
+hs.hotkey.bind(hyper, 'M', grid.maximizeWindow)
 
 hs.hotkey.bind(hyper, 'F', function() hs.window.focusedWindow():toggleFullScreen() end)
 
-hs.hotkey.bind(hyper, 'N', hs.grid.pushWindowNextScreen)
-hs.hotkey.bind(hyper, 'P', hs.grid.pushWindowPrevScreen)
+hs.hotkey.bind(hyper, 'N', grid.pushWindowNextScreen)
+hs.hotkey.bind(hyper, 'P', grid.pushWindowPrevScreen)
 
-hs.hotkey.bind(hyper, 'J', hs.grid.pushWindowDown)
-hs.hotkey.bind(hyper, 'K', hs.grid.pushWindowUp)
-hs.hotkey.bind(hyper, 'H', hs.grid.pushWindowLeft)
-hs.hotkey.bind(hyper, 'L', hs.grid.pushWindowRight)
+hs.hotkey.bind(hyper, 'J', grid.pushWindowDown)
+hs.hotkey.bind(hyper, 'K', grid.pushWindowUp)
+hs.hotkey.bind(hyper, 'H', grid.pushWindowLeft)
+hs.hotkey.bind(hyper, 'L', grid.pushWindowRight)
 
-hs.hotkey.bind(hyper, 'U', hs.grid.resizeWindowTaller)
-hs.hotkey.bind(hyper, 'O', hs.grid.resizeWindowWider)
-hs.hotkey.bind(hyper, 'I', hs.grid.resizeWindowThinner)
-hs.hotkey.bind(hyper, 'Y', hs.grid.resizeWindowShorter)
+hs.hotkey.bind(hyper, 'U', grid.resizeWindowTaller)
+hs.hotkey.bind(hyper, 'O', grid.resizeWindowWider)
+hs.hotkey.bind(hyper, 'I', grid.resizeWindowThinner)
+hs.hotkey.bind(hyper, 'Y', grid.resizeWindowShorter)
 
 
 --
@@ -193,22 +193,22 @@ hs.hotkey.bind({"alt", "shift"}, 'P', function()
 
 
 -- this works, just bind it to a key
---hs.application.launchOrFocus("Microsoft Excel")
---hs.application.launchOrFocus("Adobe Acrobat Pro")
---hs.application.launchOrFocus("Microsoft Outlook")
-hs.hotkey.bind({"ctrl"}, 'R', "Sublime Text", function () hs.application.launchOrFocus("Sublime Text") end)
+--app.launchOrFocus("Microsoft Excel")
+--app.launchOrFocus("Adobe Acrobat Pro")
+--app.launchOrFocus("Microsoft Outlook")
+hs.hotkey.bind({"ctrl"}, 'R', "Sublime Text", function () app.launchOrFocus("Sublime Text") end)
 
 hs.hotkey.bind({"alt", "shift"}, 'X', function()
-  hs.application.launchOrFocus("Microsoft Excel")
+  app.launchOrFocus("Microsoft Excel")
       end)
 
 hs.hotkey.bind({"alt", "shift"}, 'O', function()
-  hs.application.launchOrFocus("Microsoft Outlook")
+  app.launchOrFocus("Microsoft Outlook")
       end)
 
 
 --hs.hotkey.bind({"alt"}, '<>', function()
---  hs.application.launchOrFocus("Adobe Acrobat Pro")
+--  app.launchOrFocus("Adobe Acrobat Pro")
 --      end)
 
 -- raise console
@@ -236,8 +236,8 @@ hs.hotkey.bind({"cmd", "alt"},"0",function()
 end)
 
 hs.hotkey.bind({"cmd", "alt"}, '9', function()
-  hs.application.launchOrFocus('Sublime Text')
-  hs.application.launchOrFocus('Google Chrome')
+  app.launchOrFocus('Sublime Text')
+  app.launchOrFocus('Google Chrome')
   local editorLayout = {
   {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
   {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
@@ -248,4 +248,3 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   subl:selectMenuItem({"Find","Replace"})
   subl:activate()
 end)
-
