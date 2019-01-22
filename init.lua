@@ -1,4 +1,5 @@
 require("extras/cheaphints")
+require("extras/redshift")
 
 -- Reload on config change
 function reloadConfig(files)
