@@ -14,7 +14,8 @@ function reloadConfig(files)
     end
 end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
-hs.alert.show("Hammerspoon ready!", 3)
+--hs.alert.show("Hammerspoon ready!", 3)
+hs.alert.show("Config loaded 👍", 3)
 
 -- modkeys/chords
 modkey = {"cmd","alt"}
