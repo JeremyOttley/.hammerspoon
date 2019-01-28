@@ -228,7 +228,7 @@ hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
 hs.hotkey.bind({"cmd", "alt"},"0",function()
   local proofingLayout = {
     {"Acrobat", nil, nil, hs.layout.right50, nil, nil},
-    {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
+    --{"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
    }
     hs.layout.apply(proofingLayout)
 
@@ -242,7 +242,7 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   app.launchOrFocus('Google Chrome')
   local editorLayout = {
   {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
-  {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
+  --{"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
 }
   hs.layout.apply(editorLayout)
   -- Doesn't work yet. Why?      
