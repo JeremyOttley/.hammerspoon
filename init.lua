@@ -24,7 +24,8 @@ modkey = {"cmd","alt"}
 hyper = {'ctrl', 'alt', 'cmd'}
 
 --{'⌘', '⌥', '⇧', 'ctrl'}
-hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
+--hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
+hyperShift = {'ctrl', 'shift'}
 
 -- Modules
 local fnutils = hs.fnutils
@@ -149,9 +150,13 @@ hs.hotkey.bind(hyperShift, '=', function() grid.adjustHeight(1)  end)
 hs.hotkey.bind(hyperShift, '-', function() grid.adjustHeight(-1) end)
 
 hs.hotkey.bind(hyperShift, 'left',  function() hs.window.focusedWindow():focusWindowWest()  end)
+hs.hotkey.bind(hyperShift, 'H',  function() hs.window.focusedWindow():focusWindowWest()  end)
 hs.hotkey.bind(hyperShift, 'right', function() hs.window.focusedWindow():focusWindowEast()  end)
+hs.hotkey.bind(hyperShift, 'L', function() hs.window.focusedWindow():focusWindowEast()  end)
 hs.hotkey.bind(hyperShift, 'up',    function() hs.window.focusedWindow():focusWindowNorth() end)
+hs.hotkey.bind(hyperShift, 'K',    function() hs.window.focusedWindow():focusWindowNorth() end)
 hs.hotkey.bind(hyperShift, 'down',  function() hs.window.focusedWindow():focusWindowSouth() end)
+hs.hotkey.bind(hyperShift, 'J',  function() hs.window.focusedWindow():focusWindowSouth() end)
 
 hs.hotkey.bind(hyper, 'M', grid.maximizeWindow)
 
