@@ -1,5 +1,5 @@
 require("extras/cheaphints")
-require("extras/redshift")
+--require("extras/redshift")
 
 -- Reload on config change
 function reloadConfig(files)
@@ -247,7 +247,7 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   app.launchOrFocus('Google Chrome')
   local editorLayout = {
   {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
-  --{"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
+  {"BBedit", nil, nil, hs.layout.right50, nil, nil},
 }
   hs.layout.apply(editorLayout)
   -- Doesn't work yet. Why?      
