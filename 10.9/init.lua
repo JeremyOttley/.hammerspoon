@@ -1,3 +1,5 @@
+require("extras/cheaphints")
+
 -- Reload on config change
 function reloadConfig(files)
     doReload = false
@@ -11,8 +13,7 @@ function reloadConfig(files)
     end
 end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
---hs.alert.show("Hammerspoon ready!", 3)
-hs.alert.show("Config loaded 👍", 3)
+hs.alert.show("Hammerspoon ready!", 3)
 
 -- modkeys/chords
 modkey = {"cmd","alt"}
@@ -21,8 +22,33 @@ modkey = {"cmd","alt"}
 hyper = {'ctrl', 'alt', 'cmd'}
 
 --{'⌘', '⌥', '⇧', 'ctrl'}
---hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
-hyperShift = {'ctrl', 'shift'}
+hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
+
+-- Modules
+local fnutils = hs.fnutils
+local each = fnutils.each
+local partial = fnutils.partial
+local concat = fnutils.concat
+local indexOf = fnutils.indexOf
+
+local eventtap = hs.eventtap
+local keyStroke = eventtap.keyStroke
+
+local app = hs.application
+local frontmost = app.frontmostApplication
+local watcher = app.watcher
+local get = app.get
+local launchOrFocus = app.launchOrFocus
+
+local screen = hs.screen
+local allScreens = screen.allScreens
+local mainScreen = screen.mainScreen
+local setPrimary = screen.setPrimary
+
+local grid = hs.grid
+
+-- Other local variables
+local shift = 0.075
 
 --
 -- [[ Functions ]] --
@@ -57,48 +83,77 @@ hs.window.animationDuration = 0
 -- Remove window shadows
 hs.window.setShadows(true)
 
-hs.loadSpoon("Lunette")
+-- tile left
+hs.hotkey.bind(modkey, "Left", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
 
--- customBindings = {
---   center = {
---     {{modkey}, "C"},
---   }
---   fullScreen = {
--- 	{{modkey}, "F"},
---   }
---   leftHalf = {
---   {{modkey}, "left"},
---   }
---   rightHalf = {
---   {{modkey}, "right"},
---   }
---   topHalf = {
---  {{modkey}, "up"},
---  }
---  bottomHalf = {
---  {{modkey}, "down"}
---  }
-  --undo = false,
-  --redo = false
---}
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w / 2
+  f.h = max.h
+  win:setFrame(f)
+end)
 
---spoon.Lunette:bindHotkeys(customBindings)
-spoon.Lunette:bindHotkeys()
+-- tile right
+hs.hotkey.bind(modkey, "Right", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (max.w / 2)
+  f.y = max.y
+  f.w = max.w / 2
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+--[[ Window Filter ]]--
+-- set up your windowfilter
+-- switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
+-- switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
+-- switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome'} -- specialized switcher for your dozens of browser windows :)
+
+-- bind to hotkeys; WARNING: at least one modifier key is required!
+-- hs.hotkey.bind('alt','tab','Next window',function()switcher:next()end)
+-- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher:previous()end)
+
+-- alternatively, call .nextWindow() or .previousWindow() directly (same as hs.window.switcher.new():next())
+-- hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
+-- you can also bind to `repeatFn` for faster traversing
+-- hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
 
 --[[GRID]]--
 
-local grid = hs.grid
-
+-- Set grid size.
 grid.GRIDWIDTH  = 12
 grid.GRIDHEIGHT = 12
 grid.MARGINX    = 0
 grid.MARGINY    = 0
+-- Set window animation off. It's much smoother.
+hs.window.animationDuration = 0
+-- Set volume increments
+local volumeIncrement = 5
 
---
--- [[ Commands ]] --
---
+--hs.hotkey.bind(hyper, ';', function() grid.snap(hs.window.focusedWindow()) end)
+--hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), grid.snap) end)
+
+hs.hotkey.bind(hyper,      '=', function() grid.adjustWidth(1)   end)
+hs.hotkey.bind(hyper,      '-', function() grid.adjustWidth(-1)  end)
+hs.hotkey.bind(hyperShift, '=', function() grid.adjustHeight(1)  end)
+hs.hotkey.bind(hyperShift, '-', function() grid.adjustHeight(-1) end)
+
+hs.hotkey.bind(hyperShift, 'left',  function() hs.window.focusedWindow():focusWindowWest()  end)
+hs.hotkey.bind(hyperShift, 'right', function() hs.window.focusedWindow():focusWindowEast()  end)
+hs.hotkey.bind(hyperShift, 'up',    function() hs.window.focusedWindow():focusWindowNorth() end)
+hs.hotkey.bind(hyperShift, 'down',  function() hs.window.focusedWindow():focusWindowSouth() end)
 
 hs.hotkey.bind(hyper, 'M', grid.maximizeWindow)
+
+hs.hotkey.bind(hyper, 'F', function() hs.window.focusedWindow():toggleFullScreen() end)
 
 hs.hotkey.bind(hyper, 'N', grid.pushWindowNextScreen)
 hs.hotkey.bind(hyper, 'P', grid.pushWindowPrevScreen)
@@ -112,6 +167,11 @@ hs.hotkey.bind(hyper, 'U', grid.resizeWindowTaller)
 hs.hotkey.bind(hyper, 'O', grid.resizeWindowWider)
 hs.hotkey.bind(hyper, 'I', grid.resizeWindowThinner)
 hs.hotkey.bind(hyper, 'Y', grid.resizeWindowShorter)
+
+
+--
+-- [[ Commands ]] --
+--
 
 --- quick open folders
 directoryLaunchKeyRemap({"ctrl"}, "D", "~/Documents") 
@@ -130,6 +190,7 @@ hs.hotkey.bind({"alt"}, 'p', function()
 hs.hotkey.bind({"alt", "shift"}, 'P', function()
     hs.itunes.play()
       end)
+
 
 -- this works, just bind it to a key
 --app.launchOrFocus("Microsoft Excel")
@@ -165,7 +226,7 @@ hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
 hs.hotkey.bind({"cmd", "alt"},"0",function()
   local proofingLayout = {
     {"Acrobat", nil, nil, hs.layout.right50, nil, nil},
-    --{"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
+    {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
    }
     hs.layout.apply(proofingLayout)
 
@@ -179,7 +240,7 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   app.launchOrFocus('Google Chrome')
   local editorLayout = {
   {"Sublime Text", nil, nil, hs.layout.right50, nil, nil},
-  {"BBedit", nil, nil, hs.layout.right50, nil, nil},
+  {"Google Chrome", nil, nil, hs.layout.left50, nil, nil},
 }
   hs.layout.apply(editorLayout)
   -- Doesn't work yet. Why?      
