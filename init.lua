@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+require("extras/cheaphints")
+--require("extras/redshift")
+
+>>>>>>> 54526c2db776cf52640da24c57b662711e58280f
 -- Reload on config change
 function reloadConfig(files)
     doReload = false
@@ -23,6 +29,35 @@ hyper = {'ctrl', 'alt', 'cmd'}
 --{'⌘', '⌥', '⇧', 'ctrl'}
 --hyperShift = {'ctrl', 'alt', 'cmd', 'shift'}
 hyperShift = {'ctrl', 'shift'}
+<<<<<<< HEAD
+=======
+
+-- Modules
+local fnutils = hs.fnutils
+local each = fnutils.each
+local partial = fnutils.partial
+local concat = fnutils.concat
+local indexOf = fnutils.indexOf
+
+local eventtap = hs.eventtap
+local keyStroke = eventtap.keyStroke
+
+local app = hs.application
+local frontmost = app.frontmostApplication
+local watcher = app.watcher
+local get = app.get
+local launchOrFocus = app.launchOrFocus
+
+local screen = hs.screen
+local allScreens = screen.allScreens
+local mainScreen = screen.mainScreen
+local setPrimary = screen.setPrimary
+
+local grid = hs.grid
+
+-- Other local variables
+local shift = 0.075
+>>>>>>> 54526c2db776cf52640da24c57b662711e58280f
 
 --
 -- [[ Functions ]] --
@@ -87,13 +122,45 @@ spoon.Lunette:bindHotkeys()
 
 --[[GRID]]--
 
+<<<<<<< HEAD
 local grid = hs.grid
+=======
+-- Set grid size.
+grid.GRIDWIDTH  = 12
+grid.GRIDHEIGHT = 12
+grid.MARGINX    = 0
+grid.MARGINY    = 0
+-- Set window animation off. It's much smoother.
+hs.window.animationDuration = 0
+-- Set volume increments
+local volumeIncrement = 5
+
+--hs.hotkey.bind(hyper, ';', function() grid.snap(hs.window.focusedWindow()) end)
+--hs.hotkey.bind(hyper, "'", function() hs.fnutils.map(hs.window.visibleWindows(), grid.snap) end)
+
+hs.hotkey.bind(hyper,      '=', function() grid.adjustWidth(1)   end)
+hs.hotkey.bind(hyper,      '-', function() grid.adjustWidth(-1)  end)
+hs.hotkey.bind(hyperShift, '=', function() grid.adjustHeight(1)  end)
+hs.hotkey.bind(hyperShift, '-', function() grid.adjustHeight(-1) end)
+
+hs.hotkey.bind(hyperShift, 'left',  function() hs.window.focusedWindow():focusWindowWest()  end)
+hs.hotkey.bind(hyperShift, 'H',  function() hs.window.focusedWindow():focusWindowWest()  end)
+hs.hotkey.bind(hyperShift, 'right', function() hs.window.focusedWindow():focusWindowEast()  end)
+hs.hotkey.bind(hyperShift, 'L', function() hs.window.focusedWindow():focusWindowEast()  end)
+hs.hotkey.bind(hyperShift, 'up',    function() hs.window.focusedWindow():focusWindowNorth() end)
+hs.hotkey.bind(hyperShift, 'K',    function() hs.window.focusedWindow():focusWindowNorth() end)
+hs.hotkey.bind(hyperShift, 'down',  function() hs.window.focusedWindow():focusWindowSouth() end)
+hs.hotkey.bind(hyperShift, 'J',  function() hs.window.focusedWindow():focusWindowSouth() end)
+
+hs.hotkey.bind(hyper, 'M', grid.maximizeWindow)
+>>>>>>> 54526c2db776cf52640da24c57b662711e58280f
 
 grid.GRIDWIDTH  = 12
 grid.GRIDHEIGHT = 12
 grid.MARGINX    = 0
 grid.MARGINY    = 0
 
+<<<<<<< HEAD
 --
 -- [[ Commands ]] --
 --
@@ -102,6 +169,20 @@ hs.hotkey.bind(hyper, 'M', grid.maximizeWindow)
 
 hs.hotkey.bind(hyper, 'N', grid.pushWindowNextScreen)
 hs.hotkey.bind(hyper, 'P', grid.pushWindowPrevScreen)
+=======
+hs.hotkey.bind(hyper, 'N', grid.pushWindowNextScreen)
+hs.hotkey.bind(hyper, 'P', grid.pushWindowPrevScreen)
+
+hs.hotkey.bind(hyper, 'J', grid.pushWindowDown)
+hs.hotkey.bind(hyper, 'K', grid.pushWindowUp)
+hs.hotkey.bind(hyper, 'H', grid.pushWindowLeft)
+hs.hotkey.bind(hyper, 'L', grid.pushWindowRight)
+
+hs.hotkey.bind(hyper, 'U', grid.resizeWindowTaller)
+hs.hotkey.bind(hyper, 'O', grid.resizeWindowWider)
+hs.hotkey.bind(hyper, 'I', grid.resizeWindowThinner)
+hs.hotkey.bind(hyper, 'Y', grid.resizeWindowShorter)
+>>>>>>> 54526c2db776cf52640da24c57b662711e58280f
 
 hs.hotkey.bind(hyper, 'J', grid.pushWindowDown)
 hs.hotkey.bind(hyper, 'K', grid.pushWindowUp)
@@ -186,4 +267,8 @@ hs.hotkey.bind({"cmd", "alt"}, '9', function()
   subl = hs.appfinder.appFromName("Sublime Text")
   subl:selectMenuItem({"Find","Replace"})
   subl:activate()
+<<<<<<< HEAD
 end)
+=======
+end)
+>>>>>>> 54526c2db776cf52640da24c57b662711e58280f
