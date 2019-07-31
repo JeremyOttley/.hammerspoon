@@ -165,6 +165,7 @@ hs.hotkey.bind({"cmd", "alt"}, "Y", hs.toggleConsole)
      end
    end
    --hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("console.log("))
+   hs.hotkey.bind({"alt", "cmd"}, "L", keyStrokes("http://pilot.muse.jhu.edu/collection/collection.cgi"))
 
 
 hs.hotkey.bind({"cmd", "alt"},"0",function()
